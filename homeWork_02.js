@@ -88,15 +88,27 @@ function makeCounter1(count) {
 }
 
 const makeCounter2 = function(count) {
-    return count + 1
+    return count + 2
 }
 
-const makeCounter3 = count => count + 1
+const makeCounter3 = count => count + 3
 
 const makeCounter4 = function makeCounte(count) {
-    return count + 1
+    return count + 4
 }
 
 function makeCounter5(makeCounter1) {
-    return makeCounter1
+    return makeCounter1 
 }
+
+/* Бонус 
+Задание 2 – Развернуть строку в обратном направлении при помощи методов массивов:
+
+function reverseStr(str) {
+  return …
+} */
+function reverseStr(str) {
+    return str.split('').reverse().join('')
+}
+
+console.log(reverseStr('12345'))
