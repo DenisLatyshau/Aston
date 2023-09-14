@@ -96,7 +96,46 @@ TCP гарантирует строгий порядок. А вот в QUIC он
 3. Лучше работает мультиплексирование.
 4. Об установке соединений и передаче пакетов через QUIC мы уже поговорили. Поэтому давайте подробнее обсудим мультиплексирование. */
 
-// --------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
+
+/* 3. Прочитать про способы отмены запроса, включая объект "AbortController"
+const abortController = new AbortController()
+const signal = abortController.signal()
+
+fetch('https://api.com/data', {signal})
+    .then(response => response.json())
+    .then(data => doStuff(data))
+    .catch(error => {
+        if (error.name === 'AbortError') {
+            console.error('Fetch request timed out')
+        } else {
+            console.error('Fetch failed', error)
+        }
+    })
+
+setTimeout(() => {
+    abortController.abort()
+}, 5000)    
+
+
+Также можно не прерывать запрос, а можно игнорировать результат выполнения
+const PlanetInfo = ({id}) => {
+    const [name, setName] = useState(null)
+
+    useEffect(() => {
+        let canceled = false
+        fetch(`http://swapi.dev/api/planets/${id}`)
+        .then(res => res.json())
+        .then(data => !canceled && setName(data.name))
+        return () => canceled = true
+    }, [id])
+
+    return (
+        <div>{id} --- {name}</div>
+    )
+} */
+
+//--------------------------------------------------------------------------------------------------
 
 /* 4. Почему, если обратиться к переменным созданным через let, const до их объявления - мы получаем ReferenceError? 
 
